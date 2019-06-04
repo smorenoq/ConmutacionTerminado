@@ -2,7 +2,7 @@ const gpio = require('onoff').Gpio;
 
 var sem1Rojo = new gpio(2, 'out');
 var sem1Amarillo = new gpio(3, 'out');
-var sem1Verde = new gpio(4, 'out');
+var sem1Verde = new gpio(18, 'out');
 
 
 var sem2Rojo = new gpio(5, 'out');
@@ -78,7 +78,7 @@ function titilarVerde2(t = 500)
     for (var i = 0; i < 5; i++)
     {
 	sem2Verde.writeSync(0);
-	p1Verde.writeSync(1);
+	p1Verde.writeSync(0);
 	delay(t);
 	sem2Verde.writeSync(1);
 	p1Verde.writeSync(1);
