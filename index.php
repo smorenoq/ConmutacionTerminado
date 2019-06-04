@@ -29,42 +29,11 @@
 
   <img src = "semaforo.gif" align = "right" width = "400" height = "500">
 
-  <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-   Ingresar Duración Semáforo 1: <input type="text" name="dur1"><br><br>
-    <input type="submit" Value = "Ingresar">
-  </form>
-
-  <br>
-
-   <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-   Ingresar Duración Semáforo 2: <input type="text" name="dur2"><br><br>
-    <input type="submit" Value = "Ingresar">
-   </form>
-
-   <br>
-
   <?php
     set_time_limit(0);
 
     $dur1 = 5;
     $dur2 = 5;
-     
-    if (isset($_POST["dur1"])) 
-    {
-        $_SESSION["dur1"] = $_POST["dur1"];
-        $dur1 = $_SESSION["dur1"];
-    }
-     
-    echo "Duración actual Semáforo 1: " .$_SESSION["dur1"]." segundos";
-
-    if (isset($_POST["dur2"])) 
-    {
-        $_SESSION["dur2"] = $_POST["dur2"];
-        $dur2 = $_SESSION["dur2"];
-    }
-
-    echo nl2br("\n\nDuración actual Semáforo 2: " .$_SESSION["dur2"]). " segundos";
-
 
     if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['empezar']))
     {
@@ -103,7 +72,7 @@
         global $dur1;
         global $dur2;
 
-        shell_exec("kilall node");
+        shell_exec("killall node");
         shell_exec("node apagar");
 
         $comando = "node funcionamiento ";
