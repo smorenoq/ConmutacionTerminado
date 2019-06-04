@@ -27,13 +27,13 @@
       </style>
   </head>
 
-  <img src = "semaforo.gif" align = "right" width = "400" height = "500">
-
   <?php
     set_time_limit(0);
 
-    $dur1 = 5;
-    $dur2 = 5;
+    $dur1 = 7;
+    $dur2 = 7;
+
+    $estado = "Apagado";
 
     if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['empezar']))
     {
@@ -71,6 +71,7 @@
     {   
         global $dur1;
         global $dur2;
+        global $estado;
 
         shell_exec("killall node");
         shell_exec("node apagar");
@@ -83,24 +84,35 @@
         $comando .= "1";
         $comando .= " >/dev/null &";
         shell_exec($comando);
+        
+        $estado = "Día";
     }
 
     function apagar()
     {
+        global $estado;
+
         shell_exec("killall node");
         shell_exec("node apagar");
+
+        $estado = "Apagado";
     }
 
     function noche()
     {
+        global $estado;
+
         shell_exec("killall node");
         shell_exec("node noche  >/dev/null &");
+
+        $estado = "Noche";
     }
 
     function peaton1()
     {
         global $dur1;
         global $dur2;
+        global $estado;
 
         shell_exec("killall node");
 
@@ -111,12 +123,15 @@
         $comando .= " >/dev/null &";
 
         shell_exec($comando);
+
+        $estado = "Día";
     }
 
     function peaton2()
     {
         global $dur1;
         global $dur2;
+        global $estado;
 
         shell_exec("killall node");
 
@@ -126,7 +141,11 @@
         $comando .= $dur2;
         $comando .= " >/dev/null &";
         shell_exec($comando);
-    }		  
+
+        $estado = "Día";
+    }
+
+    echo "<br>Estado: ". $estado;		  
 			   
    ?>
     <br><br>
